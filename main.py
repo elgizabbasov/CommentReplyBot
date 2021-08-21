@@ -54,10 +54,10 @@ class RedditBot:
             duration = now - datetime.fromtimestamp(dictionary['last_posted'])
             duration_seconds = duration.total_seconds()
             hours = divmod(duration_seconds, 3600)[0]
-            if hours >= 0:
+            if hours >= 0.08:
                 return True
             else:
-                print(f"Couldnt post *{dictionary['phrase']}*. Cool Down time: {24 - hours}")
+                print(f"Couldnt post *{dictionary['phrase']}*. Cool Down time: {0.08 - hours}")
         return False
     
     def make_reply(self, i, comment): 
@@ -67,14 +67,14 @@ class RedditBot:
             print(comment.body)
             print(dictionary['phrase'])
             print(dictionary['reply'])
-            time.sleep(60 * 60 * 3)
+            time.sleep(60 * 9)
         except Exception as e:
             print(e)
         now = datetime.now()
         self.response_list[i]['last_posted'] = now.timestamp()
         db['response_list'] = self.response_list
 
-#db.clear
+# db.clear()
 keep_alive()  
 bot = RedditBot("pairs.csv")
 subreddit = reddit.subreddit("all")
