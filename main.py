@@ -53,11 +53,11 @@ class RedditBot:
             now = datetime.now()
             duration = now - datetime.fromtimestamp(dictionary['last_posted'])
             duration_seconds = duration.total_seconds()
-            hours = divmod(duration_seconds, 3600)[0]
-            if hours >= 0.08:
+            # hours = divmod(duration_seconds, 3600)[0]
+            if duration_seconds >= 540:
                 return True
             else:
-                print(f"Couldnt post *{dictionary['phrase']}*. Cool Down time: {0.08 - hours}")
+                print(f"Couldnt post *{dictionary['phrase']}*. Cool Down time: {540 - duration_seconds}")
         return False
     
     def make_reply(self, i, comment): 
